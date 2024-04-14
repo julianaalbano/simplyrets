@@ -1,7 +1,6 @@
 import React from 'react';
 
-// import heartFill from './assets/heart-fill.svg';
-// import heartStroke from './assets/heart-stroke.svg';
+import Property from 'Property';
 
 /**
  * @param {object} props - React component props
@@ -9,10 +8,9 @@ import React from 'react';
  * @returns {React.Component} Property Listings Page
  */
 const PropertyListings = ({ properties }) => {
-  console.log(properties);
   return (
     <div>
-      <h1>Content...</h1>
+      {properties.map(property => <Property property={property} />)}
     </div>
   );
 }
