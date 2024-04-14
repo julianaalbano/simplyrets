@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  background-color: #F4F4F4;
+  height: 103px;
+}
+
+.header p {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: left;
+  width: 294.93px;
+  height: 40px;
+  padding-top: 30px;
+  padding-left: 60px;
+}
+
+/* responsive */
+@media (max-width: 430px) {
+  .header {
+    background-color: #F4F4F4;
+    height: 63px;
+  }
+
+  .header p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: left;
+    width: 294.93px;
+    height: 40px;
+    padding-top: 15px;
+    padding-left: 30px;
+  }
+}

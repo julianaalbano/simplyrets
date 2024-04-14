@@ -1,9 +1,10 @@
 import React from 'react';
+import './styles/global.css';
 
 const Header = () => {
   return (
-    <div>
-      <h1>PROPERTY LISTINGS</h1>
+    <div className='header'>
+      <p>Property Listings</p>
     </div>
   );
 }
