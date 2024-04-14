@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PropertyListings() {
+const Header = () => {
   return (
     <div>
       <h1>PROPERTY LISTINGS</h1>
@@ -8,4 +8,4 @@ function PropertyListings() {
   );
 }
 
-export default PropertyListings;
+export default Header;

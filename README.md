@@ -7,3 +7,5 @@
 # Code and Design Decisions
 
 <!-- Please document your code & design decisions here. -->
+
+* in a more complex application I'd use redux
