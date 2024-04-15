@@ -21,14 +21,14 @@ const Property = ({ property, addFavorite, removeFavorite }) => {
     photos,
     property: { area, bathsFull, bathsHalf, bedrooms }
   } = property;
-  const [isFavoriteListing, setIsFavorite] = useState(isFavorite(mlsId));
+  const [isFavoriteListing, setIsFavorite] = useState(isFavorite({ mlsId }));
   const handleRemoveFavorite = () => {
     setIsFavorite(false);
-    removeFavorite(mlsId);
+    removeFavorite({ mlsId });
   }
   const handleAddFavorite = () => {
     setIsFavorite(true);
-    addFavorite(mlsId);
+    addFavorite({ mlsId });
   }
   return (
     <div className='property'>

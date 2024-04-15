@@ -1,3 +1,4 @@
+export const FAVORITES_KEY = 'favorites';
 export const STATES = {
   Alabama: 'AL',
   Alaska: 'AK',

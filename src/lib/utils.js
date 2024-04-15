@@ -1,9 +1,11 @@
+import { FAVORITES_KEY } from './const';
+
 /**
  * a wrapper for fetch that will throw an error for http status codes above 400
  * @param {object} params - function parameters
  * @param {string} params.url - the absolute url of the request
  * @param {object} params.options - fetch options object
- * @returns {object} jsonResponse
+ * @returns {object} json response
  */
 const betterFetch = async ({ url, options }) => {
   const res = await fetch(url, { ...options, mode: 'cors' });
@@ -17,6 +19,11 @@ const betterFetch = async ({ url, options }) => {
   return jsonResponse;
 };
 
+/**
+ * retrieves all the properties cached in local storage.
+ * if there aren't any properties in local storage, this function makes the API request and caches them.
+ * @returns {Array} list of properties
+ */
 export const getProperties = async () => {
   const url = 'https://api.simplyrets.com/properties';
   const options = {
@@ -28,7 +35,7 @@ export const getProperties = async () => {
       Authorization: `Basic ${btoa('simplyrets:simplyrets')}`
     }
   };
-  // use the api url as the key
+  // use the API url as the key in local storage
   const cache = localStorage.getItem(url);
   if (cache) {
     return JSON.parse(cache);
@@ -40,10 +47,24 @@ export const getProperties = async () => {
     });
 };
 
-export const isFavorite = mlsId => {
-  const cache = localStorage.getItem('favorites');
-  if (cache) {
-    const parsed = JSON.parse(cache);
+/**
+ * retrieves all favorite listings from local storage
+ * @returns {Array} list of favorite listings
+ */
+const getFavorites = () => {
+  return localStorage.getItem(FAVORITES_KEY);
+}
+
+/**
+ * identifies if the given `mlsId` is included in the 'favorites' key in local storage
+ * @param {object} params - function parameters
+ * @param {string} params.mlsId - MLS ID
+ * @returns {boolean} whether or not the provided `mlsId` is a 'favorite' listing
+ */
+export const isFavorite = ({ mlsId }) => {
+  const favorites = getFavorites();
+  if (favorites) {
+    const parsed = JSON.parse(favorites);
     if (parsed.indexOf(mlsId) >= 0) {
       return true;
     }
@@ -51,27 +72,37 @@ export const isFavorite = mlsId => {
   }
 };
 
-export const addFavorite = mlsId => {
-  const currentCache = localStorage.getItem('favorites');
-  if (currentCache) {
-    const parsed = JSON.parse(currentCache);
+/**
+ * adds a given `mlsId` to the list of 'favorites' in local storage
+ * @param {object} params - function parameters
+ * @param {string} params.mlsId - MLS ID to add
+ */
+export const addFavorite = ({ mlsId }) => {
+  const favorites = getFavorites()
+  if (favorites) {
+    const parsed = JSON.parse(favorites);
     if (parsed.indexOf(mlsId) === -1) {
       parsed.push(mlsId);
-      localStorage.setItem('favorites', JSON.stringify(parsed));
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(parsed));
     }
   } else {
-    localStorage.setItem('favorites', JSON.stringify([mlsId]));
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify([mlsId]));
   }
 }
 
-export const removeFavorite = mlsId => {
-  const currentCache = localStorage.getItem('favorites');
-  if (currentCache) {
-    const parsed = JSON.parse(currentCache);
+/**
+ * removes a given `mlsId` from the list of 'favorites' in local storage
+ * @param {object} params - function parameters
+ * @param {string} params.mlsId - MLS ID to remove
+ */
+export const removeFavorite = ({ mlsId }) => {
+  const favorites = getFavorites()
+  if (favorites) {
+    const parsed = JSON.parse(favorites);
     const index = parsed.indexOf(mlsId);
     if (index > -1) {
       parsed.splice(index, 1);
-      localStorage.setItem('favorites', JSON.stringify(parsed));
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(parsed));
     }
   }
 }
