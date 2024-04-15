@@ -25,6 +25,7 @@ const betterFetch = async ({ url, options }) => {
  * @returns {Array} list of properties
  */
 export const getProperties = async () => {
+  // API Documentation: https://docs.simplyrets.com/api/index.html#/Listings/get_properties
   const url = 'https://api.simplyrets.com/properties';
   const options = {
     method: 'GET',
