@@ -8,4 +8,5 @@
 
 <!-- Please document your code & design decisions here. -->
 
-* in a more complex application I'd use redux
+* in a more complex application I'd use redux (although it was said not to use)
+* notes about flex box usage...
