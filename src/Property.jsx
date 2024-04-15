@@ -18,7 +18,7 @@ const formattedDate = date => {
  * @param {Array} props.property - a single property
  * @returns {React.Component} One property listing
  */
-const Property = ({ property }) => {
+const Property = ({ property, isFavorite = false }) => {
   const {
     address: { city, state, streetName },
     listDate,
@@ -30,12 +30,12 @@ const Property = ({ property }) => {
   return (
     <div className='property'>
       <div className='image'>
-        <button type='button'>
+        <div hidden={!isFavorite} onClick={() => console.log('favorite')}>
           <object data={heartFill} type='image/svg+xml' aria-label='Red heart.' />
-        </button>
-        <button type='button'>
+        </div>
+        <div hidden={isFavorite} onClick={() => console.log('NOT favorite')}>
           <object data={heartStroke} type='image/svg+xml' aria-label='Outlined heart.' />
-        </button>
+        </div>
         <img src={photos[0]} alt={`MLS ID: ${mlsId}`} />
       </div>
       <p className='specs'>{`${bedrooms} BR | ${bathsFull + (bathsHalf / 2)} Bath | ${area} Sq Ft`}</p>

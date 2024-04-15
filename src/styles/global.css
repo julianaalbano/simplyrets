@@ -45,17 +45,19 @@ code {
   width: 315px;
 }
 
-.image button {
+.image div {
   position: absolute;
   top: 0;
   right: 0;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .image object {
   height: 47px;
   width: 47px;
+  pointer-events: none;
 }
 
 .property {
