@@ -6,7 +6,12 @@ import { STATES } from '../lib/const';
 import { convertNumberPriceToStringPrice, formattedDate, isFavorite } from '../lib/utils';
 
 export const TEST_ID = {
-  PROPERTY: 'property'
+  ADDRESS: 'address',
+  DATE: 'date',
+  IMAGE: 'image',
+  PRICE: 'price',
+  PROPERTY: 'property',
+  SPECS: 'specs'
 };
 
 /**
@@ -36,7 +41,7 @@ const Property = ({ property, addFavorite, removeFavorite }) => {
   }
   return (
     <div className='property' data-testid={TEST_ID.PROPERTY}>
-      <div className='image'>
+      <div className='image' data-testid={TEST_ID.IMAGE}>
         <div hidden={!isFavoriteListing} onClick={handleRemoveFavorite}>
           <object data={heartFill} type='image/svg+xml' aria-label='Red heart' />
         </div>
@@ -45,10 +50,18 @@ const Property = ({ property, addFavorite, removeFavorite }) => {
         </div>
         <img src={photos[0]} alt={`MLS ID: ${mlsId}`} />
       </div>
-      <p className='specs'>{`${bedrooms} BR | ${bathsFull + (bathsHalf / 2)} Bath | ${area} Sq Ft`}</p>
-      <p className='price'>{convertNumberPriceToStringPrice({ numPrice: listPrice })}</p>
-      <p className='address'>{`${streetName}, ${city}, ${STATES[state]}`}</p>
-      <p className='listedDate'>{`Listed: ${formattedDate({ date: listDate })}`}</p>
+      <p className='specs' data-testid={TEST_ID.SPECS}>
+        {`${bedrooms} BR | ${bathsFull + (bathsHalf / 2)} Bath | ${area} Sq Ft`}
+      </p>
+      <p className='price' data-testid={TEST_ID.PRICE}>
+        {convertNumberPriceToStringPrice({ numPrice: listPrice })}
+      </p>
+      <p className='address' data-testid={TEST_ID.ADDRESS}>
+        {`${streetName}, ${city}, ${STATES[state]}`}
+      </p>
+      <p className='listedDate' data-testid={TEST_ID.DATE}>
+        {`Listed: ${formattedDate({ date: listDate })}`}
+      </p>
     </div>
   );
 }

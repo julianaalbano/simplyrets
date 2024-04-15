@@ -19,3 +19,4 @@
 * would want to store the API url in parameter store or env variable (in case the URL changes, you wouldn't have to deploy that change)
 * added jest for util testing
 * didn't mock/stub fetch or local storage - that is important but didn't have time when timeboxing this work to 3 hours
+* didn't add testing for toggling property favorite feature
