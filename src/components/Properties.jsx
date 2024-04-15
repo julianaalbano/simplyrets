@@ -2,6 +2,11 @@ import React from 'react';
 
 import Property from './Property';
 
+export const TEST_ID = {
+  PROPERTIES: 'properties',
+  PROPERTY: 'property'
+};
+
 /**
  * @param {object} props - component props
  * @param {Array} props.properties - list of properties
@@ -11,7 +16,7 @@ import Property from './Property';
  */
 const Properties = ({ properties, addFavorite, removeFavorite }) => {
   return (
-    <div className='properties'>
+    <div className='properties' data-testid={TEST_ID.PROPERTIES}>
       {properties.map(property => {
         return (
           <Property

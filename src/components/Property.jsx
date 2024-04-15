@@ -5,6 +5,10 @@ import heartStroke from '../assets/heart-stroke.svg';
 import { STATES } from '../lib/const';
 import { convertNumberPriceToStringPrice, formattedDate, isFavorite } from '../lib/utils';
 
+export const TEST_ID = {
+  PROPERTY: 'property'
+};
+
 /**
  * @param {object} props - component props
  * @param {Array} props.property - a single property
@@ -31,7 +35,7 @@ const Property = ({ property, addFavorite, removeFavorite }) => {
     addFavorite({ mlsId });
   }
   return (
-    <div className='property'>
+    <div className='property' data-testid={TEST_ID.PROPERTY}>
       <div className='image'>
         <div hidden={!isFavoriteListing} onClick={handleRemoveFavorite}>
           <object data={heartFill} type='image/svg+xml' aria-label='Red heart' />
