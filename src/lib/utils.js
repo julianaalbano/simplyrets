@@ -40,13 +40,6 @@ export const getProperties = async () => {
     });
 };
 
-export const getFavorites = () => {
-  const cache = localStorage.getItem('favorites');
-  if (cache) {
-    return JSON.parse(cache);
-  }
-};
-
 export const isFavorite = mlsId => {
   const cache = localStorage.getItem('favorites');
   if (cache) {
@@ -82,3 +75,27 @@ export const removeFavorite = mlsId => {
     }
   }
 }
+
+/**
+ * @param {object} params - function params
+ * @param {string} params.date - date & time string in this format: "1991-12-12T00:45:02.01603Z"
+ * @returns {string} date string in this type of format: 12/12/1991
+ */
+export const formattedDate = ({ date }) => {
+  const month = date.slice(5, 7);
+  const day = date.slice(8, 10);
+  const year = date.slice(0, 4);
+  return `${month}/${day}/${year}`;
+};
+
+/**
+ * @param {object} params - function params
+ * @param {number} params.numPrice - price as a number
+ * @returns {string} price as a string (in USD)
+ */
+export const convertNumberPriceToStringPrice = ({ numPrice }) => {
+  return (numPrice).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+};

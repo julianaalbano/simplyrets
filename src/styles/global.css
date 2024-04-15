@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+.notFound {
+  padding-left: 60px;
+  padding-top: 30px;
+  color: red;
+}
+
 .header {
   background-color: #F4F4F4;
   height: 103px;

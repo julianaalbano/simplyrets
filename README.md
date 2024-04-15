@@ -13,3 +13,5 @@
 * paginate responses
 * better address formatting (Title Casing, abbreviations for Boulevard to cut down on wrapped lines)
 * 375 width and 1180 width are according to comps. didn't have enough time to handle responsiveness perfectly between those widths.
+* could style the not found page more
+* could add proptypes for better props validation
