@@ -113,20 +113,28 @@ export const removeFavorite = ({ mlsId }) => {
  * @returns {string} date string in this type of format: 12/12/1991
  */
 export const formattedDate = ({ date }) => {
-  const month = date.slice(5, 7);
-  const day = date.slice(8, 10);
-  const year = date.slice(0, 4);
-  return `${month}/${day}/${year}`;
+  if (date) {
+    const month = date.slice(5, 7);
+    const day = date.slice(8, 10);
+    const year = date.slice(0, 4);
+    if (month && day && year) {
+      return `${month}/${day}/${year}`;
+    }
+  }
+  return '';
 };
 
 /**
  * @param {object} params - function params
- * @param {number} params.numPrice - price as a number
+ * @param {number} params.numPrice - price as a number (negative numbers not supported)
  * @returns {string} price as a string (in USD)
  */
 export const convertNumberPriceToStringPrice = ({ numPrice }) => {
-  return (numPrice).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
+  if (numPrice >= 0) {
+    return (numPrice).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+  }
+  return '$0.00';
 };
