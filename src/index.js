@@ -4,18 +4,26 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from './Header';
 import Properties from './Properties';
-import { getProperties } from 'utils';
+import { addFavorite, getFavorites, getProperties, removeFavorite } from 'utils';
 import reportWebVitals from './reportWebVitals';
 import './bootstrap';
 
-const properties = await getProperties()
+const properties = await getProperties();
+const favorites = getFavorites();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Properties properties={properties} />} />
+        <Route path="/" element={
+          <Properties
+            properties={properties}
+            favorites={favorites}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
+        } />
         <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
     </Router>

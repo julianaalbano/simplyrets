@@ -34,9 +34,51 @@ export const getProperties = async () => {
     return JSON.parse(cache);
   }
   return betterFetch({ url, options })
-    .then(json => {
-      // set the json result in localStorage
-      localStorage.setItem(url, JSON.stringify(json));
-      return json;
+    .then(res => {
+      localStorage.setItem(url, JSON.stringify(res));
+      return res;
     });
 };
+
+export const getFavorites = () => {
+  const cache = localStorage.getItem('favorites');
+  if (cache) {
+    return JSON.parse(cache);
+  }
+};
+
+export const isFavorite = mlsId => {
+  const cache = localStorage.getItem('favorites');
+  if (cache) {
+    const parsed = JSON.parse(cache);
+    if (parsed.indexOf(mlsId) >= 0) {
+      return true;
+    }
+    return false;
+  }
+};
+
+export const addFavorite = mlsId => {
+  const currentCache = localStorage.getItem('favorites');
+  if (currentCache) {
+    const parsed = JSON.parse(currentCache);
+    if (parsed.indexOf(mlsId) === -1) {
+      parsed.push(mlsId);
+      localStorage.setItem('favorites', JSON.stringify(parsed));
+    }
+  } else {
+    localStorage.setItem('favorites', JSON.stringify([mlsId]));
+  }
+}
+
+export const removeFavorite = mlsId => {
+  const currentCache = localStorage.getItem('favorites');
+  if (currentCache) {
+    const parsed = JSON.parse(currentCache);
+    const index = parsed.indexOf(mlsId);
+    if (index > -1) {
+      parsed.splice(index, 1);
+      localStorage.setItem('favorites', JSON.stringify(parsed));
+    }
+  }
+}

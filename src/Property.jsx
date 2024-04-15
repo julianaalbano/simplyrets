@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { STATES } from './const';
 import heartFill from './assets/heart-fill.svg';
 import heartStroke from './assets/heart-stroke.svg';
+import { isFavorite } from 'utils';
 
 // TODO: abstract out pricing logic + formatted date
 
@@ -14,11 +15,22 @@ const formattedDate = date => {
 };
 
 /**
- * @param {object} props - React component props
+ * @param {object} props - component props
  * @param {Array} props.property - a single property
- * @returns {React.Component} One property listing
+ * @param {Function} props.addFavorite - add a favorite listing
+ * @param {Function} props.removeFavorite - remove a favorite listing
+ * @returns {React.Component} a single property listing
  */
-const Property = ({ property, isFavorite = false }) => {
+const Property = ({ property, addFavorite, removeFavorite }) => {
+  const [isFavoriteListing, setIsFavorite] = useState(isFavorite(property.mlsId));
+  const handleRemoveFavorite = () => {
+    setIsFavorite(false);
+    removeFavorite(property.mlsId);
+  }
+  const handleAddFavorite = () => {
+    setIsFavorite(true);
+    addFavorite(property.mlsId);
+  }
   const {
     address: { city, state, streetName },
     listDate,
@@ -30,10 +42,10 @@ const Property = ({ property, isFavorite = false }) => {
   return (
     <div className='property'>
       <div className='image'>
-        <div hidden={!isFavorite} onClick={() => console.log('favorite')}>
+        <div hidden={!isFavoriteListing} onClick={handleRemoveFavorite}>
           <object data={heartFill} type='image/svg+xml' aria-label='Red heart.' />
         </div>
-        <div hidden={isFavorite} onClick={() => console.log('NOT favorite')}>
+        <div hidden={isFavoriteListing} onClick={handleAddFavorite}>
           <object data={heartStroke} type='image/svg+xml' aria-label='Outlined heart.' />
         </div>
         <img src={photos[0]} alt={`MLS ID: ${mlsId}`} />
